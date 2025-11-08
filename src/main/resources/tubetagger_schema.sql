@@ -1,5 +1,7 @@
-create table if not exists video (
-	video_id int generated always as identity primary key,
-	url varchar(100) not null,
-	title varchar(200) not null
+CREATE TABLE if NOT EXISTS video (
+	video_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	url VARCHAR(100) NOT NULL,
+	title VARCHAR(200) NOT NULL
 );
+
+ALTER TABLE video ADD CONSTRAINT unique_youtube_url UNIQUE (url);

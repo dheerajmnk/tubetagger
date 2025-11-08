@@ -1,5 +1,6 @@
 package com.videolibrary.tubetagger.model;
 
+import com.videolibrary.tubetagger.annotation.ValidYouTubeUrl;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -18,8 +19,8 @@ public class Video {
     @Column(name = "video_id")
     private Integer videoId;
 
-    @NotBlank(message="Video URL cannot be blank")
-    @Column(nullable = false)
+    @ValidYouTubeUrl
+    @Column(unique = true, nullable = false)
     private String url;
 
     @NotBlank(message = "Video Title cannot be blank")

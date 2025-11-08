@@ -4,6 +4,7 @@ import com.videolibrary.tubetagger.model.Video;
 import com.videolibrary.tubetagger.service.VideoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -27,16 +28,24 @@ public class VideoController {
     }
 
     @PostMapping("/videos/save")
-    public String saveVideo(@Valid @ModelAttribute("video") Video video, Errors errors, RedirectAttributes redirectAttributes) {
+    public String saveVideo(@Valid @ModelAttribute("video") Video video, Errors errors, RedirectAttributes redirectAttributes, Model model) {
         if(errors.hasErrors()){
             redirectAttributes.addFlashAttribute("errorMessage", "Please fill all required fields correctly!");
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.video", errors);
             redirectAttributes.addFlashAttribute("video", video);
             return "redirect:/add-video";
         }
-        videoService.saveVideoDetails(video);
-        redirectAttributes.addFlashAttribute("successMessage", "Video added successfully!");
-        return "redirect:/add-video";
+        try {
+            videoService.saveVideoDetails(video);
+            redirectAttributes.addFlashAttribute("successMessage", "Video added successfully!");
+            return "redirect:/add-video";
+        }
+        catch (DataIntegrityViolationException e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "This video already exists in the database.");
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.video", errors);
+            redirectAttributes.addFlashAttribute("video", video);
+            return "redirect:/add-video";
+        }
     }
 
 }
