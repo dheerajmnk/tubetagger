@@ -5,3 +5,5 @@ CREATE TABLE if NOT EXISTS video (
 );
 
 ALTER TABLE video ADD CONSTRAINT unique_youtube_url UNIQUE (url);
+
+ALTER TABLE video ADD COLUMN thumbnail VARCHAR(100) NOT NULL;

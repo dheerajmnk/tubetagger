@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="128" height="72" viewBox="0 0 128 72" role="img" aria-labelledby="titleDesc">
+    <title id="titleDesc">Default video thumbnail</title>
+
+    <!-- Background rounded rectangle with soft shadow -->
+    <defs>
+        <filter id="softShadow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.12"/>
+        </filter>
+    </defs>
+
+    <!-- rounded rect to give subtle card shape -->
+    <rect x="2" y="2" width="124" height="68" rx="10" ry="10"
+          fill="#f7f7f8" filter="url(#softShadow)" />
+
+    <!-- outer ring / circle -->
+    <g transform="translate(64,36)">
+        <circle r="20" fill="#ffffff" />
+        <circle r="26" fill="none" stroke="#e6e7ea" stroke-width="2" />
+        <!-- Inner subtle glow ring -->
+        <circle r="28" fill="none" stroke="#ffffff" stroke-opacity="0.85" stroke-width="2" />
+    </g>
+
+    <!-- play icon (triangle) centered -->
+    <g transform="translate(64,36)">
+        <path d="M -6 -9 L 10 0 L -6 9 Z" fill="#ff3b30"/>
+    </g>
+</svg>

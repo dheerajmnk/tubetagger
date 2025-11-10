@@ -22,6 +22,16 @@ public class VideoService {
         String cleanUrl = canonicalizeYouTubeUrl(video.getUrl());
         video.setUrl(cleanUrl);
 
+        // Generate and set thumbnail before saving
+        String videoId = extractVideoId(cleanUrl);
+        String thumbnailUrl;
+        if (videoId == null) {
+            thumbnailUrl = "/images/default-thumbnail.svg";
+        } else {
+            thumbnailUrl = "https://img.youtube.com/vi/" + videoId + "/hqdefault.jpg";
+        }
+        video.setThumbnailUrl(thumbnailUrl);
+
         videoRepository.save(video);
     }
 
@@ -58,6 +68,15 @@ public class VideoService {
         }
 
         return url;
+    }
+
+    public static String extractVideoId(String cleanUrl) {
+        if (cleanUrl == null || cleanUrl.isBlank()) {
+            return null;
+        }
+        String videoId = cleanUrl.substring(cleanUrl.indexOf("watch?v=") + 8);
+
+        return (videoId != null && videoId.length() == 11) ? videoId : null;
     }
 
 }
