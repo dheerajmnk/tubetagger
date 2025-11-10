@@ -4,6 +4,7 @@ import com.videolibrary.tubetagger.model.Video;
 import com.videolibrary.tubetagger.repository.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 @Service
 public class VideoService {
@@ -11,18 +12,17 @@ public class VideoService {
     @Autowired
     private VideoRepository videoRepository;
 
-    public boolean saveVideoDetails(Video video){
+    public List<Video> getAllVideos() {
+        return videoRepository.findAll();
+    }
+
+    public void saveVideoDetails(Video video){
 
         // Canonicalize YouTube URL before saving
         String cleanUrl = canonicalizeYouTubeUrl(video.getUrl());
         video.setUrl(cleanUrl);
 
-        boolean isSaved = false;
-        Video savedVideo = videoRepository.save(video);
-        if(null != savedVideo && savedVideo.getVideoId()>0) {
-            isSaved = true;
-        }
-        return isSaved;
+        videoRepository.save(video);
     }
 
     public String canonicalizeYouTubeUrl(String url) {
