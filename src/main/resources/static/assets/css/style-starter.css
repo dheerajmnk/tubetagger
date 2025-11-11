@@ -1,0 +1,184 @@
+/* -----------------------------
+   Global Fonts & Base
+----------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #fff6f2;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* -----------------------------
+   Navbar Styling
+----------------------------- */
+
+.navbar {
+  box-shadow: 0 2px 6px rgba(255, 123, 84, 0.25);
+}
+
+.custom-navbar {
+  background-color: #ffe5dc; /* soft coral-cream tone */
+  border-bottom: 1px solid #ffd2c3;
+  padding: 0.8rem 1.5rem;
+  box-shadow: 0 2px 6px rgba(255, 160, 122, 0.2);
+}
+
+.navbar-brand {
+  font-weight: 600;
+  color: #ff7b54 !important;
+  font-size: 1.5rem;
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease;
+}
+
+.navbar-brand:hover {
+  color: #ff5533 !important;
+}
+
+.nav-link {
+  color: #444 !important;
+  font-weight: 500;
+  margin-right: 1rem;
+  transition: all 0.25s ease;
+  border-radius: 6px;
+  padding: 0.5rem 0.8rem;
+}
+
+.nav-link:hover {
+  background-color: #ffd6c9;
+  color: #ff5533 !important;
+}
+
+.add-video-link {
+  background-color: #ff7b54;
+  color: #fff !important;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 0.5rem 0.9rem;
+  transition: all 0.25s ease;
+}
+
+.add-video-link:hover {
+  background-color: #ff5533;
+  color: #fff !important;
+  box-shadow: 0 2px 5px rgba(255, 85, 51, 0.3);
+}
+
+/* -----------------------------
+   Video List Styling
+----------------------------- */
+
+.video-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #fffaf9;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.video-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.video-thumbnail {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    background-color: #ffe5de;
+}
+
+.video-title {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 8px 0 0;
+    text-decoration: none;
+    color: #212529;
+    display: block;
+    padding: 8px 12px 12px;
+    transition: color 0.2s ease;
+}
+
+.video-title:hover {
+    color: #ff6f61 !important;
+    text-decoration: none;
+}
+
+.video-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    padding: 30px 50px;
+    justify-items: center;
+}
+
+/* -----------------------------
+   Add Video page styling
+----------------------------- */
+
+main.container {
+    margin-top: 60px;
+    max-width: 600px;
+}
+
+h1.text-center {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.card {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.card-header {
+    background-color: #ff6f61 !important;
+    color: #fff !important;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border-top-left-radius: 16px !important;
+    border-top-right-radius: 16px !important;
+}
+
+.card-body {
+    background-color: #fff;
+    padding: 25px;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+}
+
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    padding: 10px 12px;
+    transition: all 0.2s ease;
+}
+
+.form-control:focus {
+    border-color: #ff6f61;
+    box-shadow: 0 0 0 3px rgba(255, 111, 97, 0.2);
+}
+
+.btn-primary {
+    background-color: #ff6f61;
+    border: none;
+    font-weight: 500;
+    border-radius: 8px;
+    padding: 10px 16px;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #ff856f;
+    transform: translateY(-1px);
+}
+
+.text-danger {
+    font-size: 0.9rem;
+}
+
