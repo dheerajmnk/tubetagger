@@ -47,9 +47,10 @@
         <div class="col" th:each="video : ${videos}">
             <div class="card video-card h-100">
                 <a th:href="${video.url}" target="_blank">
-                    <img th:src="${video.thumbnailUrl} ?: '/images/default-thumbnail.svg'"
+                    <img th:src="${video.thumbnailUrl}"
                          th:alt="${video.title} ?: 'Default video thumbnail'"
-                         class="video-thumbnail">
+                         class="video-thumbnail"
+                    >
                 </a>
                 <div class="card-body text-center">
                     <a th:href="${video.url}" target="_blank" class="video-title" th:text="${video.title}">Video Title</a>

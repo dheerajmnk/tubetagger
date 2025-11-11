@@ -54,6 +54,12 @@ public class VideoController {
             redirectAttributes.addFlashAttribute("video", video);
             return "redirect:/add-video";
         }
+        catch (IllegalArgumentException e) {
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.video", errors);
+            redirectAttributes.addFlashAttribute("video", video);
+            return "redirect:/add-video";
+        }
     }
 
 }

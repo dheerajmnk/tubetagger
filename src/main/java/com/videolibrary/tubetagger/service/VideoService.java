@@ -26,7 +26,7 @@ public class VideoService {
         String videoId = extractVideoId(cleanUrl);
         String thumbnailUrl;
         if (videoId == null) {
-            thumbnailUrl = "/images/default-thumbnail.svg";
+            throw new IllegalArgumentException("Invalid YouTube URL - no valid video ID found");
         } else {
             thumbnailUrl = "https://img.youtube.com/vi/" + videoId + "/hqdefault.jpg";
         }
