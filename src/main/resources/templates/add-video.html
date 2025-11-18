@@ -8,7 +8,7 @@
 </head>
 <body>
 <!-- Include Header -->
-<div th:insert="header :: header"></div>
+<div th:insert="~{header :: header}"></div>
 
 <div th:if="${successMessage}" class="alert alert-success text-center mt-3" role="alert">
     <span th:text="${successMessage}"></span>
@@ -39,10 +39,54 @@
                     <input type="text" id="title" th:field="*{title}" class="form-control" />
                     <small th:errors="*{title}" class="text-danger"></small>
                 </div>
+                <div class="mb-3">
+                    <label for="channel">Channel</label>
+                    <select id="channel" th:field="*{channel}" class="form-select">
+                        <option value="">-- Select Channel --</option>
+                        <option th:each="ch : ${channels}"
+                                th:value="${ch.channelId}"
+                                th:text="${ch.name}">
+                        </option>
+                    </select>
+                    <small th:errors="*{channel}" class="text-danger"></small>
+                </div>
+                <button type="button"
+                        class="btn btn-sm btn-dark-orange ms-2 mb-3"
+                        data-bs-toggle="modal"
+                        data-bs-target="#addChannelModal">
+                    + Add Channel
+                </button>
                 <div class="d-flex justify-content-between">
                     <button type="submit" class="btn btn-primary">Save</button>
                 </div>
             </form>
+
+            <!-- Add channel modal -->
+
+            <div class="modal fade" id="addChannelModal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <h5 class="modal-title">Add Channel</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <div class="modal-body">
+                            <form th:action="@{/channels/save}" th:object="${channel}" method="post">
+
+                                <label class="form-label">Channel Name</label>
+                                <input type="text" th:field="*{name}" class="form-control mb-3"/>
+
+                                <button type="submit" class="btn btn-dark-orange w-100">
+                                    Add Channel
+                                </button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </main>

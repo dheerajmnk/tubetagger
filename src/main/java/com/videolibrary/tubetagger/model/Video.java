@@ -3,13 +3,13 @@ package com.videolibrary.tubetagger.model;
 import com.videolibrary.tubetagger.annotation.ValidYouTubeUrl;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "video")
 public class Video {
@@ -29,4 +29,8 @@ public class Video {
 
     @Column(nullable = false)
     private String thumbnailUrl;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "channel_id")
+    private Channel channel;
 }

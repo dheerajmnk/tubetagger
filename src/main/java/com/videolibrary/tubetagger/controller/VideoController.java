@@ -1,6 +1,8 @@
 package com.videolibrary.tubetagger.controller;
 
+import com.videolibrary.tubetagger.model.Channel;
 import com.videolibrary.tubetagger.model.Video;
+import com.videolibrary.tubetagger.service.ChannelService;
 import com.videolibrary.tubetagger.service.VideoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class VideoController {
     @Autowired
     private VideoService videoService;
 
+    @Autowired
+    private ChannelService channelService;
+
     @GetMapping("/videos")
     public String viewVideos(Model model) {
         List<Video> videos = videoService.getAllVideos();
@@ -32,6 +37,8 @@ public class VideoController {
         if (!model.containsAttribute("video")) {
             model.addAttribute("video", new Video());
         }
+        model.addAttribute("channels", channelService.getAllChannels());
+        model.addAttribute("channel", new Channel());
         return "add-video";
     }
 

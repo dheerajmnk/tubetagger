@@ -182,3 +182,40 @@ h1.text-center {
     font-size: 0.9rem;
 }
 
+/* -----------------------------
+   Channel page styling
+----------------------------- */
+
+.btn-dark-orange {
+    background-color: #FF7043;
+    border-color: #FF7043;
+    color: white;
+    transition: background-color 0.2s ease;
+}
+
+.btn-dark-orange:hover {
+    background-color: #E65F33;
+    border-color: #E65F33;
+}
+
+.add-channel-header {
+    background-color: #FF7043;
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.channel-card {
+    border-radius: 10px;
+    transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.channel-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.channel-name {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
