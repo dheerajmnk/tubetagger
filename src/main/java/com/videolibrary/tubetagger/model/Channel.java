@@ -11,7 +11,6 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Table(name = "channel", uniqueConstraints = @UniqueConstraint(columnNames = {"name"}))
 public class Channel {
 

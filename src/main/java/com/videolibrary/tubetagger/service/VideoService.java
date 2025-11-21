@@ -20,6 +20,10 @@ public class VideoService {
         return videoRepository.findByChannelChannelId(channelId);
     }
 
+    public List<Video> getVideosByCategoryId(Integer categoryId) {
+        return videoRepository.findByCategoryId(categoryId);
+    }
+
     public void saveVideoDetails(Video video){
 
         // Canonicalize YouTube URL before saving
