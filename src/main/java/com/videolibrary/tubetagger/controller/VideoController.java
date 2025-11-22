@@ -25,7 +25,7 @@ public class VideoController {
     @Autowired
     private ChannelService channelService;
 
-    @GetMapping("/videos")
+    @GetMapping({"", "/", "/videos"})
     public String viewVideos(Model model) {
         List<Video> videos = videoService.getAllVideos();
         model.addAttribute("videos", videos);
