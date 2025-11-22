@@ -3,6 +3,8 @@ package com.videolibrary.tubetagger.service;
 import com.videolibrary.tubetagger.model.Video;
 import com.videolibrary.tubetagger.repository.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -12,8 +14,12 @@ public class VideoService {
     @Autowired
     private VideoRepository videoRepository;
 
-    public List<Video> getAllVideos() {
-        return videoRepository.findAll();
+    public Page<Video> getAllVideosPaginated(int page, int size) {
+        PageRequest pageable = PageRequest.of(
+                page,
+                size
+        );
+        return videoRepository.findAll(pageable);
     }
 
     public List<Video> getVideosByChannelId(Integer channelId) {

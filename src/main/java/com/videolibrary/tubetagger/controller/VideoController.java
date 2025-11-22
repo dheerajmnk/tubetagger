@@ -9,6 +9,8 @@ import com.videolibrary.tubetagger.service.VideoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -35,9 +37,11 @@ public class VideoController {
     private CategoryService categoryService;
 
     @GetMapping({"", "/", "/videos"})
-    public String viewVideos(Model model) {
-        List<Video> videos = videoService.getAllVideos();
-        model.addAttribute("videos", videos);
+    public String viewVideos(Model model, @RequestParam(defaultValue = "0") int page) {
+        Page<Video> videoPage = videoService.getAllVideosPaginated(page, 9);
+        model.addAttribute("videos", videoPage.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", videoPage.getTotalPages());
         return "video-list";
     }
 
