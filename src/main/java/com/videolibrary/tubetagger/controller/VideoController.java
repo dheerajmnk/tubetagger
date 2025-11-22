@@ -1,7 +1,9 @@
 package com.videolibrary.tubetagger.controller;
 
+import com.videolibrary.tubetagger.model.Category;
 import com.videolibrary.tubetagger.model.Channel;
 import com.videolibrary.tubetagger.model.Video;
+import com.videolibrary.tubetagger.service.CategoryService;
 import com.videolibrary.tubetagger.service.ChannelService;
 import com.videolibrary.tubetagger.service.VideoService;
 import jakarta.validation.Valid;
@@ -13,8 +15,12 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class VideoController {
@@ -24,6 +30,9 @@ public class VideoController {
 
     @Autowired
     private ChannelService channelService;
+
+    @Autowired
+    private CategoryService categoryService;
 
     @GetMapping({"", "/", "/videos"})
     public String viewVideos(Model model) {
@@ -38,12 +47,14 @@ public class VideoController {
             model.addAttribute("video", new Video());
         }
         model.addAttribute("channels", channelService.getAllChannels());
+        model.addAttribute("categories", categoryService.getAllCategories());
         model.addAttribute("channel", new Channel());
         return "add-video";
     }
 
     @PostMapping("/videos/save")
-    public String saveVideo(@Valid @ModelAttribute("video") Video video, Errors errors, RedirectAttributes redirectAttributes, Model model) {
+    public String saveVideo(@Valid @ModelAttribute("video") Video video, Errors errors, RedirectAttributes redirectAttributes,
+                            @RequestParam(required = false) List<Integer> categoryIds, Model model) {
         if(errors.hasErrors()){
             redirectAttributes.addFlashAttribute("errorMessage", "Please fill all required fields correctly!");
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.video", errors);
@@ -51,6 +62,10 @@ public class VideoController {
             return "redirect:/add-video";
         }
         try {
+            if (categoryIds != null && !categoryIds.isEmpty()) {
+                Set<Category> categories = new HashSet<>(categoryService.findAllByIds(categoryIds));
+                video.setCategories(categories);
+            }
             videoService.saveVideoDetails(video);
             redirectAttributes.addFlashAttribute("successMessage", "Video added successfully!");
             return "redirect:/add-video";
