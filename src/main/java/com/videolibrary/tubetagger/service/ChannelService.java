@@ -19,14 +19,7 @@ public class ChannelService {
     private VideoRepository videoRepository;
 
     public List<Channel> getAllChannels() {
-        return channelRepository.findAll();
-    }
-
-    public List<Channel> searchChannels(String q) {
-        if (q == null || q.isBlank()) {
-            return channelRepository.findAll();
-        }
-        return channelRepository.findByNameIgnoreCaseContaining(q.trim());
+        return channelRepository.findAllByOrderByNameAsc();
     }
 
     public void saveChannel(Channel channel) {
@@ -36,12 +29,4 @@ public class ChannelService {
         channelRepository.save(channel);
     }
 
-    public Channel getChannelById(Integer id) {
-        return channelRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Channel not found"));
-    }
-
-    public List<Video> getVideosForChannel(Integer channelId) {
-        return videoRepository.findByChannelChannelId(channelId);
-    }
 }

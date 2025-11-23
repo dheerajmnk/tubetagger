@@ -11,4 +11,6 @@ public interface ChannelRepository extends JpaRepository<Channel, Integer> {
 
     boolean existsByNameIgnoreCase(String name);
 
+    List<Channel> findAllByOrderByNameAsc();
+
 }

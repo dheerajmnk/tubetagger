@@ -15,8 +15,8 @@ public interface VideoRepository extends JpaRepository<Video, Integer> {
 
     Page<Video> findAll(Pageable pageable);
 
-    List<Video> findByChannelChannelId(Integer channelId);
+    List<Video> findByChannelChannelIdOrderByVideoIdDesc(Integer channelId);
 
-    @Query("SELECT v FROM Video v JOIN v.categories c WHERE c.categoryId = :categoryId")
+    @Query("SELECT v FROM Video v JOIN v.categories c WHERE c.categoryId = :categoryId ORDER BY v.videoId DESC")
     List<Video> findByCategoryId(@Param("categoryId") Integer categoryId);
 }

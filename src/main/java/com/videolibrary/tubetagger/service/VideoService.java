@@ -5,6 +5,7 @@ import com.videolibrary.tubetagger.repository.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -17,13 +18,14 @@ public class VideoService {
     public Page<Video> getAllVideosPaginated(int page, int size) {
         PageRequest pageable = PageRequest.of(
                 page,
-                size
+                size,
+                Sort.by(Sort.Direction.DESC, "videoId")
         );
         return videoRepository.findAll(pageable);
     }
 
     public List<Video> getVideosByChannelId(Integer channelId) {
-        return videoRepository.findByChannelChannelId(channelId);
+        return videoRepository.findByChannelChannelIdOrderByVideoIdDesc(channelId);
     }
 
     public List<Video> getVideosByCategoryId(Integer categoryId) {
