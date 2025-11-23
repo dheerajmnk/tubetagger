@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS video (
     video_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     url VARCHAR(100) NOT NULL,
     title VARCHAR(200) NOT NULL,
-    thumbnail VARCHAR(100) NOT NULL,
+    thumbnail_url VARCHAR(100) NOT NULL,
     channel_id INT,
 
     CONSTRAINT unique_youtube_url UNIQUE (url),
