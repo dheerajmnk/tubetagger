@@ -1,6 +1,8 @@
 # 🎥 TubeTagger - Personal Video Library Manager
 
-A clean, structured Spring Boot application to manage YouTube videos, channels, and categories with a focus on simplicity, performance, and real-world usability.
+Bookmark YouTube videos to revisit with them later. Search filtering can be done via either channel or category.
+This is a more optimal flow than manually creating playlists and adding videos to them using Youtube. 
+Users who prefer content curation over content suggestion should definitely check out this application. 
 
 ---
 
@@ -51,13 +53,15 @@ A clean, structured Spring Boot application to manage YouTube videos, channels, 
 git clone https://github.com/dheerajmnk/tubetagger
 ```
 
-### 2. Start PostgreSQL using Docker
+### 2. Create PostgreSQL database using Docker
 
 ```bash
 docker run --name tubetagger -d -p 5432:5432 -e POSTGRES_PASSWORD=db_pass -e POSTGRES_DB=tubetagger postgres
 ```
 
-### 3. Configure database connection by updating application.properties
+### 3. Run the scripts in tubetagger_schema.sql and tubetagger_data.sql in this database
+
+### 4. Configure database connection by updating application.properties
 
 ```properties
 spring.datasource.url=jdbc:postgresql://localhost:5432/tubetagger
@@ -65,19 +69,19 @@ spring.datasource.username=postgres
 spring.datasource.password=db_pass
 ```
 
-### 4. Build the project
+### 5. Build the project
 
 ```bash
 mvn clean install
 ```
 
-### 5. Run the application
+### 6. Run the application
 
 ```bash
 ./mvnw spring-boot:run
 ```
 
-### 6. Open the app
+### 7. Open the app
 
 ```
 http://localhost:8080
